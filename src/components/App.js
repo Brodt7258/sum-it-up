@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import AnswerGrid from './AnswerGrid';
+import Answer from './Answer';
+import Target from './Target';
 
 const Container = styled.div`
 	justify-content: center;
@@ -22,38 +25,6 @@ const Card = styled.div`
 	min-width: 15rem;
 	min-height: 15rem;
 `;
-
-const Target = styled.div`
-	text-align: center;
-	border: thin solid black;
-	width: 40%;
-	margin: 0 auto 0.5rem auto;
-	background-color: #ADD8E6;
-	border-radius: 0.25rem;
-	font-size: 3rem;
-	min-width: 10rem;
-`;
-
-const AnswerGrid = styled.div`
-	flex: 1;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr;
-	justify-items: center;
-	align-items: center;
-	margin: 0 3rem 8rem 3rem;
-	`;
-
-const Answer = styled.div`
-	text-align: center;
-	border: thin solid black;
-	margin: 0.5rem auto;
-	width: 60%;
-	border-radius: 0.25rem;
-	font-size: 2rem;
-	background-color: #eee;
-	min-width: 3rem;
-`;	
 
 
 
