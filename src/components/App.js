@@ -48,6 +48,14 @@ class App extends React.Component {
 		} 
 	}
 
+	resetGame = () => {
+		this.setState({
+			...getSumObject(),
+			currentTotal: 0,
+			victory: false
+		});
+	}
+
 	render() {
 		const { sum, numbers, victory } = this.state;
 		return (
@@ -63,10 +71,12 @@ class App extends React.Component {
 									number={n}
 									key={i}
 									handleSelect={this.handleNumberSelect}
+									victory={victory}
 								/>
 							))
 						}
 					</AnswerGrid>
+					<button onClick={this.resetGame} style={{ height: '2rem' }}>Reset</button>
 					{victory.toString()}
 				</Card>
 			</Container>

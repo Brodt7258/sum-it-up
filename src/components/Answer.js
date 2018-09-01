@@ -9,7 +9,7 @@ const StyledAnswer = styled.div`
 	height: 2.5rem;
 	border-radius: 0.25rem;
 	font-size: 2rem;
-	background-color: ${props => props.selected ? 'red' : '#eee'};
+	background-color: ${props => props.selected ? 'black' : '#eee'};
 	color: ${props => props.selected ? '#eee' : 'black'};
 	min-width: 3rem;
 	line-height: 2.5rem;
@@ -18,16 +18,27 @@ const StyledAnswer = styled.div`
 
 class Answer extends React.Component {
 	
-	state ={
+	state = {
 		selected: false
 	}
 
+	componentDidUpdate({ number : prevNumber}) {
+		//if the number prop changed (such as when starting a new game), deselect the component
+		const { number } = this.props;
+		if (number !== prevNumber) {
+			this.setState({ selected: false });
+		}
+	}
+
 	handleClick = () => {
-		const { handleSelect, number } = this.props;
+		const { handleSelect, number, victory } = this.props;
 		const { selected } = this.state;
 
-		handleSelect(selected ? -number : number);
-		this.setState(prev => ({ selected: !prev.selected }));
+		//if game is over, lock interaction
+		if (!victory) {
+			handleSelect(selected ? -number : number);
+			this.setState(prev => ({ selected: !prev.selected }));
+		}
 	}
 
 	render() {
