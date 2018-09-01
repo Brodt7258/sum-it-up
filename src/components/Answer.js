@@ -12,6 +12,7 @@ const StyledAnswer = styled.div`
 	background-color: #eee;
 	min-width: 3rem;
 	line-height: 2.5rem;
+	cursor: pointer;
 `;	
 
 const Answer = ({ number, handleSelect }) => {

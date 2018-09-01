@@ -1,7 +1,8 @@
-const createRandomNumbers = () => Array.from({ length: 6 }, () => Math.floor(Math.random() * 10 + 1));
 
 export const getSumObject = () => {
 	const randomList = createRandomNumbers();
+
+	//total up the first 4 elements
 	const sum = randomList.slice(0, 4).reduce((acc, cur) => acc + cur, 0);
 
 	return {
@@ -10,7 +11,11 @@ export const getSumObject = () => {
 	};
 };
 
-//credit to https://bost.ocks.org/mike/shuffle/
+//create an array of 6 random integers
+const createRandomNumbers = () => Array.from({ length: 6 }, () => Math.floor(Math.random() * 10 + 1));
+
+//Fisher-Yates
+//credit to https://bost.ocks.org/mike/shuffle/ for this implementation
 function shuffle(array) {
   var m = array.length, t, i;
 
