@@ -10,6 +10,10 @@ const StyledTarget = styled.div`
 	border-radius: 0.25rem;
 	font-size: 3rem;
 	min-width: 10rem;
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;     
 `;
 
 const Target = ({ children }) => {

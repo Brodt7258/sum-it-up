@@ -14,7 +14,7 @@ export const getSumObject = () => {
 //create an array of 6 random integers
 const createRandomNumbers = () => Array.from({ length: 6 }, () => Math.floor(Math.random() * 10 + 1));
 
-//Fisher-Yates
+//Fisher-Yates shuffle
 //credit to https://bost.ocks.org/mike/shuffle/ for this implementation
 function shuffle(array) {
   var m = array.length, t, i;

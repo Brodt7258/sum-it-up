@@ -9,11 +9,15 @@ const StyledAnswer = styled.div`
 	height: 2.5rem;
 	border-radius: 0.25rem;
 	font-size: 2rem;
-	background-color: ${props => props.selected ? 'black' : '#eee'};
-	color: ${props => props.selected ? '#eee' : 'black'};
+	background-color: ${({ selected }) => selected ? 'black' : '#eee'};
+	color: ${({ selected }) => selected ? '#eee' : 'black'};
 	min-width: 3rem;
 	line-height: 2.5rem;
-	cursor: pointer;
+	cursor: ${({ victory }) => victory ? 'default' : 'pointer' };
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;     
 `;	
 
 class Answer extends React.Component {
@@ -22,10 +26,10 @@ class Answer extends React.Component {
 		selected: false
 	}
 
-	componentDidUpdate({ number : prevNumber}) {
-		//if the number prop changed (such as when starting a new game), deselect the component
-		const { number } = this.props;
-		if (number !== prevNumber) {
+	componentDidUpdate({ victory : prevVictory }) {
+		//if the gameover condition has switched from true to false (when starting a new round), deselect the component
+		const { victory } = this.props;
+		if (prevVictory === true && victory === false) {
 			this.setState({ selected: false });
 		}
 	}
@@ -42,11 +46,11 @@ class Answer extends React.Component {
 	}
 
 	render() {
-		const { number } = this.props;
+		const { number, victory } = this.props;
 		const { selected } = this.state;
 
 		return (
-			<StyledAnswer selected={selected} onClick={this.handleClick}>
+			<StyledAnswer selected={selected} victory={victory} onClick={this.handleClick}>
 				{number}
 			</StyledAnswer>
 		);
