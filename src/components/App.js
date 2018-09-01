@@ -37,7 +37,7 @@ class App extends React.Component {
 		victory: false
 	};
 
-	handleNumberSelect = (num) => () => {
+	handleNumberSelect = (num) => {
 		this.setState(prev => ({ currentTotal: prev.currentTotal + num }), this.checkVictory);
 	}
 
@@ -62,7 +62,7 @@ class App extends React.Component {
 								<Answer
 									number={n}
 									key={i}
-									handleSelect={this.handleNumberSelect(n)}
+									handleSelect={this.handleNumberSelect}
 								/>
 							))
 						}
