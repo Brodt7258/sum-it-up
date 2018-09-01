@@ -31,10 +31,25 @@ const Card = styled.div`
 
 class App extends React.Component {
 
-	state = getSumObject();
+	state = {
+		...getSumObject(),
+		currentTotal: 0,
+		victory: false
+	};
+
+	handleNumberSelect = (num) => () => {
+		this.setState(prev => ({ currentTotal: prev.currentTotal + num }), this.checkVictory);
+	}
+
+	checkVictory = () => {
+		const { sum, currentTotal } = this.state;
+		if(sum === currentTotal) {
+			this.setState({ victory: true });
+		} 
+	}
 
 	render() {
-		const { sum, numbers } = this.state;
+		const { sum, numbers, victory } = this.state;
 		return (
 			<Container>
 				<Card>
@@ -43,9 +58,16 @@ class App extends React.Component {
 					</Target>
 					<AnswerGrid>
 						{
-							numbers.map((n, i) => <Answer number={n} key={i} />)
+							numbers.map((n, i) => (
+								<Answer
+									number={n}
+									key={i}
+									handleSelect={this.handleNumberSelect(n)}
+								/>
+							))
 						}
 					</AnswerGrid>
+					{victory.toString()}
 				</Card>
 			</Container>
 		);

@@ -14,9 +14,9 @@ const StyledAnswer = styled.div`
 	line-height: 2.5rem;
 `;	
 
-const Answer = ({ number }) => {
+const Answer = ({ number, handleSelect }) => {
 	return (
-		<StyledAnswer>
+		<StyledAnswer onClick={handleSelect}>
 			{number}
 		</StyledAnswer>
 	);
