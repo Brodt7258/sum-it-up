@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AnswerGrid from './AnswerGrid';
 import Answer from './Answer';
 import Target from './Target';
+import { getSumObject } from '../utils/helpers';
 
 const Container = styled.div`
 	justify-content: center;
@@ -29,32 +30,21 @@ const Card = styled.div`
 
 
 class App extends React.Component {
+
+	state = getSumObject();
+
 	render() {
+		const { sum, numbers } = this.state;
 		return (
 			<Container>
 				<Card>
 					<Target>
-						42
+						{sum}
 					</Target>
 					<AnswerGrid>
-						<Answer>
-							1
-						</Answer>
-						<Answer>
-							2
-						</Answer>
-						<Answer>
-							3
-						</Answer>
-						<Answer>
-							4
-						</Answer>
-						<Answer>
-							5
-						</Answer>
-						<Answer>
-							6
-						</Answer>
+						{
+							numbers.map((n, i) => <Answer number={n} key={i} />)
+						}
 					</AnswerGrid>
 				</Card>
 			</Container>

@@ -14,10 +14,10 @@ const StyledAnswer = styled.div`
 	line-height: 2.5rem;
 `;	
 
-const Answer = ({ children }) => {
+const Answer = ({ number }) => {
 	return (
 		<StyledAnswer>
-			{children}
+			{number}
 		</StyledAnswer>
 	);
 }
