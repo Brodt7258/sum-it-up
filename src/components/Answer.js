@@ -13,7 +13,7 @@ const StyledAnswer = styled.div`
 	color: ${({ selected }) => selected ? '#eee' : 'black'};
 	min-width: 3rem;
 	line-height: 2.5rem;
-	cursor: ${({ victory }) => victory ? 'default' : 'pointer' };
+	cursor: ${({ running }) => running ? 'pointer' : 'default' };
 	-webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -26,31 +26,32 @@ class Answer extends React.Component {
 		selected: false
 	}
 
-	componentDidUpdate({ victory : prevVictory }) {
-		//if the gameover condition has switched from true to false (when starting a new round), deselect the component
-		const { victory } = this.props;
-		if (prevVictory === true && victory === false) {
+	componentDidUpdate() {
+		//When App toggles 'reset' flag, deselect component
+		const { reset } = this.props;
+		if (reset) {
 			this.setState({ selected: false });
 		}
 	}
 
 	handleClick = () => {
-		const { handleSelect, number, victory } = this.props;
+		const { handleSelect, number, running } = this.props;
 		const { selected } = this.state;
 
-		//if game is over, lock interaction
-		if (!victory) {
+		//allow interaction only if game is running
+		if (running) {
+			//if it's already been selected, pass back the negative value to revert to previous state
 			handleSelect(selected ? -number : number);
 			this.setState(prev => ({ selected: !prev.selected }));
 		}
 	}
 
 	render() {
-		const { number, victory } = this.props;
+		const { number, running } = this.props;
 		const { selected } = this.state;
 
 		return (
-			<StyledAnswer selected={selected} victory={victory} onClick={this.handleClick}>
+			<StyledAnswer selected={selected} running={running} onClick={this.handleClick}>
 				{number}
 			</StyledAnswer>
 		);

@@ -34,30 +34,40 @@ class App extends React.Component {
 	state = {
 		...getSumObject(),
 		currentTotal: 0,
-		victory: false
+		running: false,
+		reset: false
 	};
 
 	handleNumberSelect = (num) => {
+		//add the selected number to the total, then test for victory
 		this.setState(prev => ({ currentTotal: prev.currentTotal + num }), this.checkVictory);
 	}
 
 	checkVictory = () => {
 		const { sum, currentTotal } = this.state;
+		//if the player reaches the correct sum, stop the game, but do not yet reset it
 		if(sum === currentTotal) {
-			this.setState({ victory: true });
+			this.setState({ running: false });
 		} 
 	}
 
 	resetGame = () => {
+		//return game to beginning state
+		//'reset' is briefly toggled to tell Answer components to deselect themselves
 		this.setState({
 			...getSumObject(),
 			currentTotal: 0,
-			victory: false
-		});
+			running: false,
+			reset: true
+		}, () => this.setState({ reset: false }));
+	}
+
+	startGame = () => {
+		this.setState({ running: true })
 	}
 
 	render() {
-		const { sum, numbers, victory } = this.state;
+		const { sum, numbers, running, reset } = this.state;
 		return (
 			<Container>
 				<Card>
@@ -71,13 +81,15 @@ class App extends React.Component {
 									number={n}
 									key={i}
 									handleSelect={this.handleNumberSelect}
-									victory={victory}
+									running={running}
+									reset={reset}
 								/>
 							))
 						}
 					</AnswerGrid>
+					<button onClick={this.startGame} style={{ height: '2rem' }}>Start</button>
 					<button onClick={this.resetGame} style={{ height: '2rem' }}>Reset</button>
-					{victory.toString()}
+					{running.toString()}
 				</Card>
 			</Container>
 		);
